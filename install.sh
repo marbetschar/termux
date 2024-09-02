@@ -1,0 +1,76 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+termux_install() {
+    echo "Termux - Start install..."
+
+    pkg upgrade -y
+    pkg install termux-api termux-services cronie -y
+
+    echo "Termux - Grant access to your local file storage..."
+    termux-setup-storage
+    read -p "Termux - Access to file storage granted [Enter to continue]."
+
+    echo "Termux - Install complete."
+}
+
+termux_setup() {
+    if [ -d ~/.termux/.git ]; then
+        echo "Termux - Setup was already run before. Skipping..."
+
+    else
+        echo "Termux - Start setup..."
+
+        mv ~/.termux ~/termux-install
+        git clone git@github.com:marbetschar/termux.git ~/.termux
+        mv ~/termux-install/* ~/.termux/
+        rmdir ~/termux-install
+
+        echo "Termux - Start services daemon..."
+        . $PREFIX/etc/profile
+        sv-enable crond
+
+        echo "Termux - Setup complete."
+    fi
+}
+
+git_install() {
+    echo "Git - Start Git install..."
+    pkg install git -y
+    echo "Git - Install complete."
+}
+
+git_setup() {
+    if [ -f ~/.ssh/id_ed25519.pub ]; then
+        echo "Git - Setup was already run before. Skipping..."
+
+    else
+        echo "Git - Start Git setup..."
+
+        echo -n "Git - User Name:   " && read GIT_USER_NAME
+        echo -n "Git - User E-Mail: " && read GIT_USER_EMAIL
+        git config --global user.name $GIT_USER_NAME
+        git config --global user.email $GIT_USER_EMAIL
+        if [ ! -f ~/.ssh/id_ed25519.pub ]; then
+            ssh-keygen -t ed25519 -C $GIT_USER_EMAIL
+        fi
+        cat ~/.ssh/id_ed25519.pub | termux-clipboard-set
+        echo "Git - The public key has been copied to your clipboard."
+        termux-open-url "https://github.com/settings/keys"
+        read -p "Git - Add the public key to your GitHub account [Enter to continue]..."   
+
+        echo "Git - Setup complete."
+    fi
+}
+
+main() {
+    read -p "IMPORTANT: Make sure you installed Termux:Boot, Termux:API and Termux:Widget before you continue [Enter to continue]"
+
+    termux_install
+    git_install
+    git_setup
+    termux_setup
+    termux_services_setup
+
+    echo "Installation complete."
+}
+main

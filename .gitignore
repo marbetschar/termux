@@ -1,0 +1,6 @@
+.*
+!.gitignore
+
+# Termux
+colors.properties
+termux.properties
