@@ -44,9 +44,10 @@ git_sync_add() {
 
 git_sync_remove() {
     GIT_ROOT=$1
-    GIT_ROOT="${GIT_ROOT/#\~/$HOME}" # expand tilde in path
+    GIT_ROOT_EXPANDED="${GIT_ROOT/#\~/$HOME}" # expand tilde in path
 
-    sed -i "|$GIT_ROOT|d" ~/.termux/conf.d/git-sync.conf
+    sed -i "s|$GIT_ROOT||g" ~/.termux/conf.d/git-sync.conf
+    sed -i "s|$GIT_ROOT_EXPANDED||g" ~/.termux/conf.d/git-sync.conf
 }
 
 git_sync_list() {
@@ -70,19 +71,19 @@ git_sync_main() {
     shift
 
     case $COMMAND in
-        "exec")
+        exec)
         git_sync_exec $@
         ;;
 
-        "add")
+        add)
         git_sync_add $@
         ;;
 
-        "remove")
+        remove)
         git_sync_remove $@
         ;;
 
-        "list")
+        list)
         git_sync_list $@
         ;;
 
@@ -91,4 +92,4 @@ git_sync_main() {
         ;;
     esac
 }
-git_sync_main
+git_sync_main $@

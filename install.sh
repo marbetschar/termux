@@ -38,11 +38,15 @@ termux_setup() {
     . $PREFIX/etc/profile
     sv-enable crond
 
+    if [ ! -d ~/.cache ]; then # solves "No such file or directory" issue when editing crontab
+        mkdir ~/.cache
+    fi
+
     if [ ! $(crontab -l | grep 'git-sync') ]; then
         echo "Termux - Schedule git-sync via cron..."
         crontab -l > ~/.termux/.crontab
-        echo "*/17 * * * * $(whoami) git-sync exec" >> ~/.termux/.crontab
-        crontab ~/.termux/.crontab
+        echo "*/17 * * * * $(whoami) ~/.termux/bin/git-sync exec" >> ~/.termux/.crontab
+        crontab -T ~/.termux/.crontab && crontab ~/.termux/.crontab
         rm ~/.termux/.crontab
     fi
 
