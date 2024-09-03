@@ -25,12 +25,28 @@ termux_setup() {
         mv ~/termux-install/* ~/.termux/
         rmdir ~/termux-install
 
-        echo "Termux - Start services daemon..."
-        . $PREFIX/etc/profile
-        sv-enable crond
-
         echo "Termux - Setup complete."
     fi
+
+    echo "Termux - Start configuration..."
+    
+    echo "Termux - Add ~/.termux/bin to PATH..."
+    touch ~/.bashrc && (cat ~/.bashrc | grep 'PATH=') || echo "export PATH=\$PATH:~/.termux/bin" >> ~/.bashrc
+    source ~/.bashrc
+
+    echo "Termux - Start services daemon..."
+    . $PREFIX/etc/profile
+    sv-enable crond
+
+    if [ ! $(crontab -l | grep 'git-sync') ]; then
+        echo "Termux - Schedule git-sync via cron..."
+        crontab -l > ~/.termux/.crontab
+        echo "*/17 * * * * $(whoami) git-sync exec" >> ~/.termux/.crontab
+        crontab ~/.termux/.crontab
+        rm ~/.termux/.crontab
+    fi
+
+    echo "Termux - Configuration complete."
 }
 
 git_install() {
