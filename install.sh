@@ -69,7 +69,6 @@ main() {
     git_install
     git_setup
     termux_setup
-    termux_services_setup
 
     echo "Installation complete."
 }
