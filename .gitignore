@@ -1,6 +1,9 @@
 .*
 !.gitignore
 
+conf.d/*
+!conf.d/.gitkeep
+
 # Termux
 colors.properties
 termux.properties
