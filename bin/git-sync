@@ -54,6 +54,10 @@ git_sync_list() {
     cat ~/.termux/conf.d/git-sync.conf
 }
 
+git_sync_edit() {
+    nano ~/.termux/conf.d/git-sync.conf
+}
+
 git_sync_usage() {
     cat <<EOF
     Usage: git-sync <command> [arguments, ...]
@@ -63,6 +67,7 @@ git_sync_usage() {
         list:           Lists all configured directories
         add <path>:     Adds <path> to git-sync
         remove <path>:  Removes <path> from git-sync
+        edit:           Edit git-sync configuration file directly
 EOF
 }
 
@@ -85,6 +90,10 @@ git_sync_main() {
 
         list)
         git_sync_list $@
+        ;;
+
+        edit)
+        git_sync_edit $@
         ;;
 
         *)
