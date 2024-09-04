@@ -60,14 +60,16 @@ git_sync_edit() {
 
 git_sync_usage() {
     cat <<EOF
-    Usage: git-sync <command> [arguments, ...]
+Syncs your Git repositories automatically.
 
-    Commands:
-        exec:           Executes git-sync for all configured directories
-        list:           Lists all configured directories
-        add <path>:     Adds <path> to git-sync
-        remove <path>:  Removes <path> from git-sync
-        edit:           Edit git-sync configuration file directly
+Usage: git-sync <command> [arguments, ...]
+
+Commands:
+    exec:           Executes git-sync for all configured directories
+    list:           Lists all configured directories
+    add <path>:     Adds <path> to git-sync
+    remove <path>:  Removes <path> from git-sync
+    edit:           Edit git-sync configuration file directly
 EOF
 }
 

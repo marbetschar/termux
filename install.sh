@@ -45,7 +45,7 @@ termux_setup() {
     if [ ! $(crontab -l | grep 'git-sync') ]; then
         echo "Termux - Schedule git-sync via cron..."
         crontab -l > ~/.termux/.crontab
-        echo "*/17 * * * * $(whoami) ~/.termux/bin/git-sync exec" >> ~/.termux/.crontab
+        echo "13,33,53 * * * * ~/.termux/bin/git-sync exec" >> ~/.termux/.crontab
         crontab -T ~/.termux/.crontab && crontab ~/.termux/.crontab
         rm ~/.termux/.crontab
     fi
@@ -70,6 +70,7 @@ git_setup() {
         echo -n "Git - User E-Mail: " && read GIT_USER_EMAIL
         git config --global user.name $GIT_USER_NAME
         git config --global user.email $GIT_USER_EMAIL
+        git config --global --add safe.directory '*' # fix fatal: detected dubious ownership in repository
         if [ ! -f ~/.ssh/id_ed25519.pub ]; then
             ssh-keygen -t ed25519 -C $GIT_USER_EMAIL
         fi
