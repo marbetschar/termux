@@ -31,7 +31,7 @@ git_sync_exec() {
         done < ~/.termux/conf.d/git-sync.conf
     fi
 
-    git_sync ~/.termux
+    git_sync_exec_dir ~/.termux
     touch ~/.termux/conf.d/git-sync.conf
 }
 
