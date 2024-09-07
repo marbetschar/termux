@@ -23,6 +23,8 @@ curl -sS -o termux-install.sh https://raw.githubusercontent.com/marbetschar/term
     rm -f termux-install.sh
 ```
 
+**IMPORTANT:** Restart Termux to complete the setup! Otherwise you might experience `git-sync: command not found` or similar errors
+
 ## Usage of `git-sync`
 
 `git-sync` syncs your Git repository automatically at minute 13, 33, and 53 of each hour:
