@@ -1,4 +1,8 @@
-# Termux Setup on Android
+# Termux Tools
+
+Tools to automate common tasks on Android using Termux:
+
+- [git-sync](#git-sync) - syncs your Git repositories automatically
 
 ## Prerequisites
 
@@ -14,7 +18,7 @@ Install the following packages from F-Droid:
 
 **:warning: IMPORTANT:** Because we want Termux to run in the background all the time, we need to make sure Androids battery optimization is disabled for it.
 
-## Run Setup
+## Installation
 
 Copy & Paste the following snippet into your Termux terminal and run it:
 
@@ -25,11 +29,13 @@ curl -sS -o termux-install.sh https://raw.githubusercontent.com/marbetschar/term
     rm -f termux-install.sh
 ```
 
-**:warning: IMPORTANT:** Restart Termux to complete the setup! Otherwise you might experience `git-sync: command not found` or similar errors
+**:warning: IMPORTANT:** Restart Termux to complete the installation! Otherwise you might experience `git-sync: command not found` or similar errors
 
-## Usage of `git-sync`
+## Tools
 
-`git-sync` syncs your Git repository automatically at minute 13, 33, and 53 of each hour:
+### `git-sync`
+
+`git-sync` syncs your Git repositories automatically at minute 13, 33, and 53 of each hour:
 
 ```shell
 $ git-sync
