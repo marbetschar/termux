@@ -12,6 +12,8 @@ Install the following packages from F-Droid:
 - **Optional (but recommended):**
     - Termux:Styling
 
+**:warning: IMPORTANT:** Because we want Termux to run in the background all the time, we need to make sure Androids battery optimization is disabled for it.
+
 ## Run Setup
 
 Copy & Paste the following snippet into your Termux terminal and run it:
@@ -23,7 +25,7 @@ curl -sS -o termux-install.sh https://raw.githubusercontent.com/marbetschar/term
     rm -f termux-install.sh
 ```
 
-**IMPORTANT:** Restart Termux to complete the setup! Otherwise you might experience `git-sync: command not found` or similar errors
+**:warning: IMPORTANT:** Restart Termux to complete the setup! Otherwise you might experience `git-sync: command not found` or similar errors
 
 ## Usage of `git-sync`
 
