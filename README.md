@@ -35,7 +35,7 @@ curl -sS -o termux-install.sh https://raw.githubusercontent.com/marbetschar/term
 
 ### `git-sync`
 
-`git-sync` syncs your Git repositories automatically at minute 13, 33, and 53 of each hour:
+`git-sync` syncs your Git repositories automatically at minute 7 past every hour from 7 to 23:
 
 ```shell
 $ git-sync

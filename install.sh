@@ -45,7 +45,7 @@ termux_setup() {
     if [ ! $(crontab -l | grep 'git-sync') ]; then
         echo "Termux - Schedule git-sync via cron..."
         crontab -l > ~/.termux/.crontab
-        echo "13,33,53 * * * * ~/.termux/bin/git-sync exec" >> ~/.termux/.crontab
+        echo "7 7-23/1 * * * ~/.termux/bin/git-sync exec" >> ~/.termux/.crontab
         crontab -T ~/.termux/.crontab && crontab ~/.termux/.crontab
         rm ~/.termux/.crontab
     fi
