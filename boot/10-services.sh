@@ -3,5 +3,6 @@
 # $PREFIX/etc/profile starts all scripts in profile.d
 # where start-services.sh is located - which in turn
 # will start all termux-services (including cron)
-termux-wake-lock
-. $PREFIX/etc/profile
+# Uncomment to re-enable (make sure to also re-enable cron jobs using crontab -e):
+# termux-wake-lock
+# . $PREFIX/etc/profile
